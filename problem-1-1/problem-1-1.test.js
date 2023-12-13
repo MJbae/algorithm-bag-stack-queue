@@ -1,4 +1,29 @@
 class Bag {
+  #items = []
+
+  isEmpty() {
+    return this.#items.length === 0 
+  }
+
+  add(item) {
+    this.#items.push(item)
+  }
+
+  size() {
+    return this.#items.length
+  }
+
+  [Symbol.iterator]() {
+    let index = 0;
+    let data = this.#items
+    return {
+      next() {
+        return index < data.length 
+            ? { done: false, value: data[index++]}
+            : { done: true }
+      }
+    }
+  }
 }
 
 test('백은 비어있는 상태로 생성된다', () => {
