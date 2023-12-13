@@ -1,28 +1,28 @@
 class Bag {
-  #items = []
+  #items = [];
 
   isEmpty() {
-    return this.#items.length === 0 
+    return this.#items.length === 0;
   }
 
   add(item) {
-    this.#items.push(item)
+    this.#items.push(item);
   }
 
   size() {
-    return this.#items.length
+    return this.#items.length;
   }
 
   [Symbol.iterator]() {
     let index = 0;
-    let data = this.#items
+    const data = this.#items;
     return {
       next() {
-        return index < data.length 
-            ? { done: false, value: data[index++]}
-            : { done: true }
-      }
-    }
+        return index < data.length
+          ? { done: false, value: data[index++] }
+          : { done: true };
+      },
+    };
   }
 }
 

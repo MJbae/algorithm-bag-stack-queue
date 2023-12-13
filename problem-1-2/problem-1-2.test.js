@@ -1,4 +1,39 @@
+class Bag {
+  #items = [];
+
+  isEmpty() {
+    return this.#items.length === 0;
+  }
+
+  add(item) {
+    this.#items.push(item);
+  }
+
+  size() {
+    return this.#items.length;
+  }
+
+  sum() {
+    return this.#items.reduce((acc, cur) => acc + cur, 0);
+  }
+
+  [Symbol.iterator]() {
+    let index = 0;
+    const data = this.#items;
+    return {
+      next() {
+        return index < data.length
+          ? { done: false, value: data[index++] }
+          : { done: true };
+      },
+    };
+  }
+}
+
 const solution = (numbers) => {
+  const bag = new Bag();
+  numbers.forEach((e) => bag.add(e));
+  return Math.floor(bag.sum() / bag.size());
 };
 
 test('숫자 배열의 평균을 반환한다', () => {
